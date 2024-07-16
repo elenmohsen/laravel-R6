@@ -1,26 +1,29 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExampleController;
+
+Route::get('login', [ExampleController::class, 'login']);
+Route::get('cv', [ExampleController::class, 'cv']);
+Route::get('contactus', [ExampleController::class, 'contactus']);
+Route::post('personaldata', [ExampleController::class, 'personaldata'])->name('personaldata');
+
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('cv', function () {
-    return view('cv');
-});
+/*Route::post('personaldata', function () {
+    return "data entered successful";
+})->name('personaldata');*/
 
-
-
-
-
-Route::get('login', function () {
-    return view('login');
-});
 
 Route::post('data', function () {
     return "data entered successful";
-})->name('data');;
+})->name('data');
+
+
 
 
 /*Route::get('link', function () {
@@ -77,6 +80,9 @@ return 'company it';
 });
 
 Route::prefix('cars')->group(function () {
+    Route::get('', function () {
+            return "cars index";
+        });
     Route::prefix('/usa')->group(function () {
         Route::get('ford', function () {
             return 'there are usa ford cars';
