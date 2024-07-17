@@ -2,28 +2,29 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
+use App\Http\Controllers\CarController;
 
 Route::get('login', [ExampleController::class, 'login']);
+Route::post('data', function () {
+    return "data entered successful";
+})->name('data');
+
 Route::get('cv', [ExampleController::class, 'cv']);
 Route::get('contactus', [ExampleController::class, 'contactus']);
 Route::post('personaldata', [ExampleController::class, 'personaldata'])->name('personaldata');
 
-
+Route::get('cars/create', [CarController::class, 'create'])->name('cars.create');
+Route::post('cars', [CarController::class, 'store'])->name('cars.store');
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+
+
 /*Route::post('personaldata', function () {
     return "data entered successful";
 })->name('personaldata');*/
-
-
-Route::post('data', function () {
-    return "data entered successful";
-})->name('data');
-
-
 
 
 /*Route::get('link', function () {
