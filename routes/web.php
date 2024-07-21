@@ -10,6 +10,7 @@ Route::post('data', function () {
     return "data entered successful";
 })->name('data');
 
+
 Route::get('cv', [ExampleController::class, 'cv']);
 Route::get('contactus', [ExampleController::class, 'contactus']);
 Route::post('personaldata', [ExampleController::class, 'personaldata'])->name('personaldata');
@@ -24,11 +25,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/*Route::post('personaldata', function () {
+    return "data entered successful";
+})->name('personaldata');*/
 
 
 /*Route::post('personaldata', function () {
     return "data entered successful";
 })->name('personaldata');*/
+
+
 
 
 /*Route::get('link', function () {
