@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassController;
@@ -15,11 +16,15 @@ Route::get('cv', [ExampleController::class, 'cv']);
 Route::get('contactus', [ExampleController::class, 'contactus']);
 Route::post('personaldata', [ExampleController::class, 'personaldata'])->name('personaldata');
 
+Route::get('cars', [CarController::class, 'index'])->name('cars.index');
 Route::get('cars/create', [CarController::class, 'create'])->name('cars.create');
 Route::post('cars', [CarController::class, 'store'])->name('cars.store');
+Route::get('cars/{id}', [CarController::class, 'edit'])->name('cars.edit');
 
+Route::get('classes', [ClassController::class, 'index'])->name('classes.index');
 Route::get('classes/create', [classController::class, 'create'])->name('class.create');
 Route::post('classes', [ClassController::class, 'store'])->name('classes.store');
+Route::get('classes/{id}', [ClassController::class, 'edit'])->name('classes.edit');
 
 Route::get('/', function () {
     return view('welcome');

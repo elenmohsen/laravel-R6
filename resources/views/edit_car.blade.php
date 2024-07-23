@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Add class</title>
+  <title>Edit Car</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,52 +23,37 @@
   <main>
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
-        <h2 class="fw-bold fs-2 mb-5 pb-2">Add Class</h2>
-        <form action="{{route('classes.store')}}" method="POST" class="px-md-5">
+        <h2 class="fw-bold fs-2 mb-5 pb-2">Add Car</h2>
+        <form action="{{route('cars.store')}}" method="POST" class="px-md-5">
           @csrf
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Class Name:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">Car Title:</label>
             <div class="col-md-10">
-              <input type="text" placeholder="grade 1A" name="className" class="form-control py-2" />
+              <input type="text" placeholder="BMW" name="carTitle" class="form-control py-2" value="{{$car['carTitle']}}" />
             </div>
           </div>
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">capacity:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">Price:</label>
             <div class="col-md-10">
-              <input type="number" step="0.1" placeholder="Enter capacity" name="capacity" class="form-control py-2" />
+              <input type="number" step="0.1" placeholder="Enter price" name="price" class="form-control py-2"value="{{$car['price']}}"  />
             </div>
           </div>
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">price:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">Description:</label>
             <div class="col-md-10">
-              <input type="number" step="0.1" placeholder="Enter price" name="price" class="form-control py-2" />
+              <textarea name="description" id="" cols="30" rows="5" class="form-control py-2">{{$car['description']}}</textarea>
             </div>
           </div>
           <hr>
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">is fulled:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">Published:</label>
             <div class="col-md-10">
-              <input type="checkbox" class="form-check-input" name="isFulled" style="padding: 0.7rem;" />
+              <input type="checkbox" class="form-check-input" name="published" style="padding: 0.7rem;" @checked($car->description) />
             </div>
           </div>
-
-          <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Time from:</label>
-            <div class="col-md-10">
-              <input type="datetime-local" placeholder="Enter date&time" name="timeFrom" />
-            </div>
-          </div>
-
-          <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Time To:</label>
-            <div class="col-md-10">
-              <input type="datetime-local" placeholder="Enter date&time" name="timeTo" />
-            </div>
-          </div>
-
           <div class="text-md-end">
             <button class="btn mt-4 btn-secondary text-white fs-5 fw-bold border-0 py-2 px-md-5">
-              Add Class
+              Edit Car
             </button>
           </div>
         </form>
