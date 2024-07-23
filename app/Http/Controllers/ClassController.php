@@ -13,7 +13,9 @@ class ClassController extends Controller
      */
     public function index()
     {
-        //
+        $classes=Classdata::get();
+          
+        return view('classes',compact('classes'));
     }
 
     /**
@@ -30,21 +32,22 @@ class ClassController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        $className="grade 1A";
+       /* $className="grade 1A";
         $capacity= 25;
         $price= 8000;
         $isFulled= true;
         $timeFrom= (new DateTime())->format("2024-07-18 12:30:00");
-        $timeTo= (new DateTime())->format("2024-07-18 7:30:00");
+        $timeTo= (new DateTime())->format("2024-07-18 7:30:00");*/
+        
+        $class=['className'=> $request->className,
+               'capacity'=> $request->capacity,
+               'price'=> $request->price,
+               'isFulled'=> isset($request->isFulled),
+               'timeFrom'=> $request->timeFrom,
+               'timeTo'=> $request->timeTo,
+              ];
 
-        Classdata::create([
-           'className' => $className,
-           'capacity' => $capacity,
-            'price'=> $price,
-            'isFulled'=> $isFulled,
-            'timeFrom'=> $timeFrom,
-            'timeTo'=> $timeTo,
-        ]);
+        Classdata::create($class);
 
         return "data added successfully";
 
@@ -63,7 +66,9 @@ class ClassController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $classes= Classdata::findorfail($id);
+
+        return view('edit_class', compact('classes'));
     }
 
     /**
