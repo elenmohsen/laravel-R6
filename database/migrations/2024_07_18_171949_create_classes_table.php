@@ -18,7 +18,7 @@ return new class extends Migration
             $table->float('price');
             $table->boolean('isFulled');
             $table->dateTime('timeFrom');
-            $table->datetime('timeTo');
+            $table->dateTime('timeTo');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -33,7 +33,7 @@
               <th scope="col">Is fulled</th>
               <th scope="col">Time from</th>
               <th scope="col">Time To</th>
-              <th scope="col">Edit</th>
+              <th scope="col">Restore</th>
               <th scope="col">Show</th>
               <th scope="col">Permenant Delete</th>
             </tr>
@@ -47,9 +47,17 @@
               <td>@if($class['isFulled']==1) yes @else no @endif</td>
               <td>{{$class['timeFrom']}}</td>
               <td>{{$class['timeTo']}}</td>
-              <td><a href="{{route('classes.edit',$class['id'])}}">Edit</a></td>
+              <td><form action="{{ route('classes.restore',$class['id'])}}" method="post">
+                   @csrf
+                   @method('patch')
+                   <button type="submit" class="btn btn-link m-0 p-0">Restore</button>
+                   </form></td>
               <td><a href="{{route('classes.show',$class['id'])}}">show</a></td>
-              <td><a href="#">Delete</a></td>
+              <td><form action="{{ route('classes.forcedelete',$class['id'])}}" method="post">
+                   @csrf
+                   @method('Delete')
+                   <button type="submit" class="btn btn-link m-0 p-0">Delete</button>
+                   </form></td>
             </tr>
             @endforeach
           

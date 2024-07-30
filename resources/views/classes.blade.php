@@ -49,11 +49,11 @@
               <td>{{$class['timeTo']}}</td>
               <td><a href="{{route('classes.edit',$class['id'])}}">Edit</a></td>
               <td><a href="{{route('classes.show',$class['id'])}}">show</a></td>
+              <!--<td><a href="{{route('classes.destroy',$class['id'])}}" onclick=" return confirm('Are you sure you want to delete?')" >Delete</a></td>-->
               <td><form action="{{route('classes.destroy',$class['id'])}}" method="post">
                    @csrf
                    @method('DELETE')
-                   <input type="hidden" name="id" value="{{$class->id }}">
-                   <input type="submit" value="delete">
+                   <button type="submit" class="btn btn-link m-0 p-0">Delete</button>
                    </form>
                     </td>
              </tr>
