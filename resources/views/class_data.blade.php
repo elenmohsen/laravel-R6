@@ -41,7 +41,7 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">price:</label>
             <div class="col-md-10">
-              <input type="number" step="0.1" placeholder="Enter price" name="price" class="form-control py-2" />
+              <input type="number" step="0.001" placeholder="Enter price" name="price" class="form-control py-2" />
             </div>
           </div>
           <hr>

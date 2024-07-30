@@ -39,14 +39,24 @@ class ClassController extends Controller
         $timeFrom= (new DateTime())->format("2024-07-18 12:30:00");
         $timeTo= (new DateTime())->format("2024-07-18 7:30:00");*/
         
-        $class=['className'=> $request->className,
+       /* $class=['className'=> $request->className,
                'capacity'=> $request->capacity,
                'price'=> $request->price,
                'isFulled'=> isset($request->isFulled),
                'timeFrom'=> $request->timeFrom,
                'timeTo'=> $request->timeTo,
-              ];
+              ];*/
 
+
+        $class = $request-> validate (['className'=>'required|string|max:20',
+                                      'capacity'=> 'required|integer|min:1|max:30',
+                                      'price'=>'required|decimal:2',
+                                      'timeFrom'=>'required|date',
+                                      'timeTo'=>'required|date',
+                                    ]);
+    
+        $class['isFulled']= isset($request-> isFulled);
+        //dd($class);
         Classdata::create($class);
 
         return redirect()->route('classes.index');
@@ -56,12 +66,13 @@ class ClassController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        $classes= Classdata::findOrFail($id);
-
+    public function show(Classdata $classes)
+     {
+       //dd($classes);
+       // $classes= Classdata::findOrFail($class);
+        //return view('class_details');
         return view('class_details', compact('classes'));
-    }
+     }
 
     /**
      * Show the form for editing the specified resource.
@@ -79,14 +90,23 @@ class ClassController extends Controller
     public function update(Request $request, string $id)
     {
        //dd($request, $id);
-       $class=['className'=> $request->className,
+       /*$class=['className'=> $request->className,
        'capacity'=> $request->capacity,
        'price'=> $request->price,
        'isFulled'=> isset($request->isFulled),
        'timeFrom'=> $request->timeFrom,
        'timeTo'=> $request->timeTo,
-        ];
+        ];*/
 
+        $class = $request-> validate (['className'=>'required|string|max:20',
+                                       'capacity'=> 'required|integer|min:1|max:30',
+                                       'price'=>'required|decimal:2',
+                                       'timeFrom'=>'required',
+                                       'timeTo'=>'required',
+                             ]);
+       
+       $class['isFulled']= isset($request-> isFulled);
+     // dd($class);
         Classdata::where('id', $id)->update($class);
 
         return redirect()->route('classes.index');
@@ -109,5 +129,22 @@ class ClassController extends Controller
         $classes= Classdata::onlyTrashed()->get();
 
         return view('trashedclasses', compact('classes'));
+    }
+
+    
+    public function restore(string $id)
+    {
+        Classdata::where('id', $id)->restore();
+
+        return redirect()->route('classes.showDeleted');
+    }
+
+
+    public function forcedelete(string $id)
+    {
+        
+        Classdata::where('id', $id)->forcedelete();
+
+        return redirect()->route('classes.index');
     }
 }
