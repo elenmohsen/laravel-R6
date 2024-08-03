@@ -41,8 +41,11 @@ Route::delete('cars/{id}/forcedelete', [CarController::class, 'forcedelete'])->n
   Route::get('classes/trashed', [ClassController::class, 'showDeleted'])->name('classes.showDeleted');
   Route::patch('classes/{id}', [ClassController::class, 'restore'])->name('classes.restore');
   Route::delete('classes/{id}/forcedelete', [ClassController::class, 'forcedelete'])->name('classes.forcedelete');
+  
+  
 
-
+  Route::get('uploadform', [ExampleController::class, 'uploadform']);
+  Route::post('uploadform', [ExampleController::class, 'upload'])->name('uploadimage');
 
 
  // Route::resource('classes', ClassController::class);

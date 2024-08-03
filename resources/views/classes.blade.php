@@ -30,6 +30,7 @@
               <th scope="col">Class Name</th>
               <th scope="col">Capacity</th>
               <th scope="col">Price</th>
+              <th scope="col">Image</th>
               <th scope="col">Is fulled</th>
               <th scope="col">Time from</th>
               <th scope="col">Time To</th>
@@ -44,6 +45,7 @@
               <td scope="row">{{$class['className']}}</td>
               <td>{{$class['capacity']}}</td>
               <td>{{$class['price']}}</td>
+              <td>{{$class['image']}}</td>
               <td>@if($class['isFulled']==1) yes @else no @endif</td>
               <td>{{$class['timeFrom']}}</td>
               <td>{{$class['timeTo']}}</td>
