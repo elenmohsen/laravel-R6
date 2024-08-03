@@ -50,13 +50,21 @@ class ClassController extends Controller
 
         $class = $request-> validate (['className'=>'required|string|max:20',
                                       'capacity'=> 'required|integer|min:1|max:30',
-                                      'price'=>'required|decimal:2',
+                                      'price'=>'required|decimal:0,2',
+                                      'image'=>'required|image|mimes:jpeg,jpg,png,gif',
                                       'timeFrom'=>'required|date',
                                       'timeTo'=>'required|date',
                                     ]);
     
         $class['isFulled']= isset($request-> isFulled);
         //dd($class);
+        
+        $file_extension = $request->image->getClientOriginalExtension();
+        $file_name = time() . '.' . $file_extension;
+        $class['image']=$file_name;
+        $path = 'assets/images';
+        $request->image->move($path, $file_name);
+       
         Classdata::create($class);
 
         return redirect()->route('classes.index');
@@ -100,13 +108,21 @@ class ClassController extends Controller
 
         $class = $request-> validate (['className'=>'required|string|max:20',
                                        'capacity'=> 'required|integer|min:1|max:30',
-                                       'price'=>'required|decimal:2',
+                                       'price'=>'required|decimal:0,2',
+                                       'image'=>'required|image|mimes:jpeg,jpg,png,gif',
                                        'timeFrom'=>'required',
                                        'timeTo'=>'required',
                              ]);
        
        $class['isFulled']= isset($request-> isFulled);
      // dd($class);
+     // if(not(is_null($request->image))){
+        $file_extension = $request->image->getClientOriginalExtension();
+        $file_name = time() . '.' . $file_extension;
+        $class['image']=$file_name;
+        $path = 'assets/images';
+        $request->image->move($path, $file_name);
+      
         Classdata::where('id', $id)->update($class);
 
         return redirect()->route('classes.index');
@@ -147,4 +163,6 @@ class ClassController extends Controller
 
         return redirect()->route('classes.index');
     }
+
+
 }

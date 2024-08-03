@@ -24,45 +24,74 @@
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
         <h2 class="fw-bold fs-2 mb-5 pb-2">Add Class</h2>
-        <form action="{{route('classes.store')}}" method="POST" class="px-md-5">
+        <form action="{{route('classes.store')}}" method="POST" class="px-md-5"  enctype="multipart/form-data">
           @csrf
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Class Name:</label>
             <div class="col-md-10">
-              <input type="text" placeholder="grade 1A" name="className" class="form-control py-2" />
+              <input type="text" placeholder="grade 1A" name="className" class="form-control py-2" value="{{old('className')}}" />
+              @error('className')
+              <div class="alert alert-warning">{{$message}}</div>
+              @enderror
             </div>
           </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">capacity:</label>
             <div class="col-md-10">
-              <input type="number" step="0.1" placeholder="Enter capacity" name="capacity" class="form-control py-2" />
+              <input type="number" step="0.1" placeholder="Enter capacity" name="capacity" class="form-control py-2" value="{{old('capacity')}}"/>
+              @error('capacity')
+              <div class="alert alert-warning">{{$message}}</div>
+              @enderror
             </div>
           </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">price:</label>
             <div class="col-md-10">
-              <input type="number" step="0.001" placeholder="Enter price" name="price" class="form-control py-2" />
+              <input type="text"  placeholder="Enter price" name="price" class="form-control py-2" value="{{old('price')}}"/>
+              @error('price')
+              <div class="alert alert-warning">{{$message}}</div>
+              @enderror
             </div>
           </div>
           <hr>
           <div class="form-group mb-3 row">
+          <label for="" class="form-label col-md-2 fw-bold text-md-end">Select Image:</label>
+          <div class="col-md-10">
+					<input type="file" id="image" name="image" accept="image/*">
+          <!--<img src="../img/" alt="" style="width: 100px">-->
+          @error('image')
+          <div class="alert alert-warning">{{$message}}</div>
+          @enderror
+				 </div>
+         </div>
+         <hr>
+          <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">is fulled:</label>
             <div class="col-md-10">
-              <input type="checkbox" class="form-check-input" name="isFulled" style="padding: 0.7rem;" />
+              <input type="checkbox" class="form-check-input" name="isFulled" style="padding: 0.7rem;" value="1"@checked(old('isFulled')) />
+              @error('isFulled')
+              <div class="alert alert-warning">{{$message}}</div>
+              @enderror
             </div>
           </div>
 
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Time from:</label>
             <div class="col-md-10">
-              <input type="datetime-local" placeholder="Enter date&time" name="timeFrom" />
+              <input type="datetime-local" placeholder="Enter date&time" name="timeFrom" value="{{old('timeFrom')}}"/>
+              @error('timeFrom')
+              <div class="alert alert-warning">{{$message}}</div>
+              @enderror
             </div>
           </div>
 
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Time To:</label>
             <div class="col-md-10">
-              <input type="datetime-local" placeholder="Enter date&time" name="timeTo" />
+              <input type="datetime-local" placeholder="Enter date&time" name="timeTo" value="{{old('timeTo')}}"/>
+              @error('timeTo')
+              <div class="alert alert-warning">{{$message}}</div>
+              @enderror
             </div>
           </div>
 

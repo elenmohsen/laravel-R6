@@ -15,6 +15,7 @@ class Classdata extends Model
         'className',
         'capacity',
         'price',
+        'image',
         'isFulled',
         'timeFrom',
         'timeTo',

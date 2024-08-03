@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('className', 50);
             $table->integer('capacity');
             $table->float('price');
+            $table->string('image',2500);
             $table->boolean('isFulled');
             $table->dateTime('timeFrom');
             $table->dateTime('timeTo');
