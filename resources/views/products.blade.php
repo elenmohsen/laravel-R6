@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>All Car</title>
+  <title>All Products</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,38 +23,31 @@
   <main>
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
-        <h2 class="fw-bold fs-2 mb-5 pb-2">All Cars</h2>
+        <h2 class="fw-bold fs-2 mb-5 pb-2">All products</h2>
         <table class="table table-hover">
           <thead>
             <tr class="table-dark">
-              <th scope="col">Car Title</th>
-              <th scope="col">Price</th>
+              <th scope="col">Product Title</th>
               <th scope="col">Description</th>
-              <th scope="col">Published</th>
+              <th scope="col">Price</th>
               <th scope="col">Image</th>
-              <th scope="col">Edit</th>
+              <th scope="col">Published</th>
+              <th scope="col">Product Status</th>
               <th scope="col">Show</th>
-              <th scope="col">Delete</th>
+              <th scope="col">Edit</th>
             </tr>
           </thead>
           <tbody>
-            @foreach($cars as $car)
+            @foreach($products as $product)
             <tr>
-              <td scope="row">{{$car['carTitle']}}</td>
-              <td>{{$car['price']}}</td>
-              <td>{{ Str::limit($car['description'], 20, $end = '...') }}</td>
-              <td>@if($car['published']==1) yes @else no @endif</td>
-              <td>{{$car['image']}}</td>
-              <td><a href="{{route('cars.edit',$car['id'])}}">Edit</a></td>
-              <td><a href="{{route('cars.show',$car['id'])}}">show</a></td>
-              <td><a href="{{route('cars.destroy',$car['id'])}}" onclick=" return confirm('Are you sure you want to delete?')" >Delete</a></td>
-              <!--<td><form action="{{ route('cars.destroy',$car['id'])}}" method="post">
-                   @csrf
-                   @method('DELETE')
-                   <input type="hidden" name="id" value="{{$car->id }}">
-                   <input type="submit" value="delete">
-                   </form>
-                    </td>-->
+              <td scope="row">{{$product['title']}}</td>
+              <td>{{ Str::limit($product['description'], 50, $end = '...') }}</td>
+              <td>{{$product['price']}}</td>
+              <td>{{$product['image']}}</td>
+              <td>@if($product['published']==1) yes @else no @endif</td>
+              <td>{{$product['status']}}</td>
+              <td><a href="{{route('product.show',$product['id'])}}">show</a></td>
+              <td><a href="{{route('product.edit',$product['id'])}}">Edit</a></td>
              </tr>
             @endforeach
           
@@ -69,4 +62,3 @@
   integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </html>
-
