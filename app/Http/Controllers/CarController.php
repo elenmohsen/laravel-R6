@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\car;
+use App\traits\Common;
+//use App\Rules\GreaterThanTen;
 
 class CarController extends Controller
 {
+    use Common;
+
     /**
      * Display a listing of the resource.
      */
@@ -38,10 +42,13 @@ class CarController extends Controller
 
        $data = $request-> validate (['carTitle'=>'required|string',
                'description'=> 'required|string|max:100',
-               'price'=>'required|decimal:1',
+               'price'=> 'required|decimal:0,2',
+               'image'=>'required|image|mimes:jpeg,jpg,png,gif|max:2000',
+               'published'=>'boolean',
              ]);
       //  dd($data);
-        $data['published']= isset($request-> published);
+        //$data['published']= isset($request-> published);
+        $data['image']=$this->uploadFile($request->image, 'assets/images');
         car::create($data);
 
         return redirect()->route('cars.index');
@@ -80,9 +87,14 @@ class CarController extends Controller
                $data = $request-> validate (['carTitle'=>'required|string',
                'description'=> 'required|string|max:100',
                'price'=>'required|decimal:1',
+               'image'=>'image|mimes:jpeg,jpg,png,gif|max:2000',
+               'published'=>'boolean',
                ]);
               //  dd($data);
-               $data['published']= isset($request-> published);
+              // $data['published']= isset($request-> published);
+               if ($request->hasFile('image')) {
+                $data['image'] = $this->uploadFile($request->image, 'assets/images');
+            }
                     
                car::where('id', $id)->update($data);
 

@@ -37,6 +37,10 @@ class ExampleController extends Controller
         $request->image->move($path, $file_name);
         return 'Uploaded';
     }
+//new project
+    public function index(){
+        return view('index');
+    }
 }
 
 

@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Classdata;
+use App\traits\Common;
 use DateTime;
 
 class ClassController extends Controller
 {
+    use Common;
     /**
      * Display a listing of the resource.
      */
@@ -59,11 +61,9 @@ class ClassController extends Controller
         $class['isFulled']= isset($request-> isFulled);
         //dd($class);
         
-        $file_extension = $request->image->getClientOriginalExtension();
-        $file_name = time() . '.' . $file_extension;
-        $class['image']=$file_name;
-        $path = 'assets/images';
-        $request->image->move($path, $file_name);
+
+        $class['image']=$this->uploadFile($request->image, 'assets/images');
+       
        
         Classdata::create($class);
 
@@ -109,20 +109,17 @@ class ClassController extends Controller
         $class = $request-> validate (['className'=>'required|string|max:20',
                                        'capacity'=> 'required|integer|min:1|max:30',
                                        'price'=>'required|decimal:0,2',
-                                       'image'=>'required|image|mimes:jpeg,jpg,png,gif',
+                                       'image'=>'image|mimes:jpeg,jpg,png,gif',
                                        'timeFrom'=>'required',
                                        'timeTo'=>'required',
                              ]);
        
        $class['isFulled']= isset($request-> isFulled);
      // dd($class);
-     // if(not(is_null($request->image))){
-        $file_extension = $request->image->getClientOriginalExtension();
-        $file_name = time() . '.' . $file_extension;
-        $class['image']=$file_name;
-        $path = 'assets/images';
-        $request->image->move($path, $file_name);
       
+     if ($request->hasFile('image')) {
+        $class['image'] = $this->uploadFile($request->image, 'assets/images');
+    }
         Classdata::where('id', $id)->update($class);
 
         return redirect()->route('classes.index');
