@@ -14,7 +14,7 @@ class FashionController extends Controller
      */
     public function index()
     {
-        $products=Fashionproduct::orderBy('id','desc')->limit(3)->get();
+        $products=Fashionproduct::orderBy('id','desc')->where('published','=',1)->limit(3)->get();
 
         return view('index',compact('products'));
     }
@@ -40,10 +40,10 @@ class FashionController extends Controller
                                       'status'=>'string',
                ]);
 
-       $product['image']=$this->uploadFile($request->image, 'assets/images');
+       $product['image']=$this->uploadFile($request->image, 'assets/images/product');
        Fashionproduct::create($product);    
 
-       return redirect()->route('product.index');
+       return redirect()->route('product.productshow');
     }
 
     /**
@@ -72,17 +72,18 @@ class FashionController extends Controller
         $product = $request-> validate (['title'=>'required|string',
                                       'description'=> 'required|string|max:100',
                                       'price'=> 'required|decimal:0,2',
-                                      'image'=>'image|mimes:jpeg,jpg,png,gif|max:2000',
+                                      'image'=>'image|mimes:jpeg,jpg,png,gif',
                                       'published'=>'boolean',
                                       'status'=>'string',
                ]);
 
        if ($request->hasFile('image')) {
-          $product['image']=$this->uploadFile($request->image, 'assets/images');
+          $product['image']=$this->uploadFile($request->image, 'assets/images/product');
        }
-       Fashionproduct::create($product);    
 
-       return redirect()->route('product.index');
+        Fashionproduct::where('id', $id)->update($product);  
+
+       return redirect()->route('product.productshow');
     }
 
     /**
@@ -91,5 +92,12 @@ class FashionController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function productshow()
+    {
+        //$products=Fashionproduct::orderBy('id','desc')->limit(3)->get();
+        $products=Fashionproduct::get();
+        return view('products',compact('products'));
     }
 }

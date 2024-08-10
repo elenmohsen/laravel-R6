@@ -48,7 +48,7 @@ class CarController extends Controller
              ]);
       //  dd($data);
         //$data['published']= isset($request-> published);
-        $data['image']=$this->uploadFile($request->image, 'assets/images');
+        $data['image']=$this->uploadFile($request->image, 'assets/images/cars');
         car::create($data);
 
         return redirect()->route('cars.index');
@@ -85,15 +85,15 @@ class CarController extends Controller
                ];*/
 
                $data = $request-> validate (['carTitle'=>'required|string',
-               'description'=> 'required|string|max:100',
-               'price'=>'required|decimal:1',
-               'image'=>'image|mimes:jpeg,jpg,png,gif|max:2000',
-               'published'=>'boolean',
-               ]);
+                                             'description'=> 'required|string|max:100',
+                                             'price'=>'required|decimal:1',
+                                              'image'=>'image|mimes:jpeg,jpg,png,gif|max:2000',
+                                              'published'=>'boolean',
+                      ]);
               //  dd($data);
               // $data['published']= isset($request-> published);
                if ($request->hasFile('image')) {
-                $data['image'] = $this->uploadFile($request->image, 'assets/images');
+                $data['image'] = $this->uploadFile($request->image, 'assets/images/cars');
             }
                     
                car::where('id', $id)->update($data);
