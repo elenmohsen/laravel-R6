@@ -44,6 +44,22 @@
               @enderror
             </div>
           </div>
+
+          <div class="form-group mb-3 row">
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">Category:</label>
+            <div class="col-md-10">
+              <select name="category_id" id="" class="form-control" value="{{old('category_id')}}">
+                <option value="">Select Category</option>
+                @foreach($categories as $category)
+                <option value="{{$category->id}}">{{$category->category_name}}</option>
+                @endforeach
+              </select>
+              @error('category')
+                <div class="alert alert-warning">{{$message}}</div>
+              @enderror
+            </div>
+          </div>
+
           <div class="form-group mb-3 row">
           <label for="" class="form-label col-md-2 fw-bold text-md-end">Select Image:</label>
           <div class="col-md-10">
@@ -68,7 +84,7 @@
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Published:</label>
             <div class="col-md-10">
               <input type="hidden" name="published" value="0">
-              <input type="checkbox" class="form-check-input" name="published" style="padding: 0.7rem;" value="1"@checked(old('published')) />
+              <input type="checkbox" class="form-check-input" name="published" style="padding: 0.7rem;" value="1" @checked(old('published')) />
             </div>
           </div>
           <div class="text-md-end">

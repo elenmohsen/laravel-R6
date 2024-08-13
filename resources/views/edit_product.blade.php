@@ -79,7 +79,7 @@
           <label for="" class="form-label col-md-2 fw-bold text-md-end">Select Image:</label>
           <div class="col-md-10">
 			       <input type="file" id="image" name="image" accept="image/*" value="{{old('image', $product['image'])}}" >
-            <img src="/assets/images/{{$product->image}}" alt="" style="width: 100px">
+            <img src="/assets/images/product/{{$product->image}}" alt="" style="width: 100px">
             @error('image')
            <div class="alert alert-warning">{{$message}}</div>
            @enderror

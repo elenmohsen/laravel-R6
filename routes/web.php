@@ -8,6 +8,7 @@ use App\Http\Controllers\ClassController;
 use App\Http\Controllers\FashionController;
 
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -213,8 +214,14 @@ Route::group([
   Route::get('index', [ExampleController::class, 'index'])->name('index');
 */
 
+Route::get('about', [ExampleController::class, 'about'])->name('about');
+
+Route::get('results', [ExampleController::class, 'studentresult']);
+
+Route::get('testOneToOne', [ExampleController::class, 'test']);
     
 //new project fashion
+
 
 Route::group([
     'prefix' => 'products',
@@ -222,10 +229,11 @@ Route::group([
     'as' => 'product.'
 ], function() {
     
-   //Route::get('index', [FashionController::class, 'index'])->name('product.index');
-    Route::get('', 'index')->name('index');
+    
+    Route::get('/index ', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
     Route::post('', 'store')->name('store');
+    Route::get('', 'productshow')->name('productshow');
     Route::get('/{id}/show','show')->name('show');
     Route::get('/{id}/edit', 'edit')->name('edit');
     Route::put('/{id}', 'update')->name('update');
