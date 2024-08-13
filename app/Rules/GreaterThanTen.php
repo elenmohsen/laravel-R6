@@ -14,6 +14,8 @@ class GreaterThanTen implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail):void
     {
-         $value > 10;
+        if ($value <= 10) {
+            $fail('The :attribute must be greater than 10.');
+        }
     }
 }

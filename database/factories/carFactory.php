@@ -32,6 +32,7 @@ class carFactory extends Factory
             'published' => fake()->numberBetween(0, 1),
             // 'image' => basename(fake()->image(public_path('assets/images/cars'))),
             'image' => $this->generateRandomImage(public_path('assets/images/cars')),
+            'category_id'=> fake()->numberbetween(1,2),
         ];
     }
 }

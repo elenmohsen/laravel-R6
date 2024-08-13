@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\car;
 use App\traits\Common;
+use App\Models\Category; 
 //use App\Rules\GreaterThanTen;
 
 class CarController extends Controller
@@ -26,7 +27,9 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view('add_car');
+        //return view('add_car');
+        $categories= Category::select('id','category_name')->get();
+        return view('add_car',compact('categories'));
     }
 
     /**
@@ -43,12 +46,14 @@ class CarController extends Controller
        $data = $request-> validate (['carTitle'=>'required|string',
                'description'=> 'required|string|max:100',
                'price'=> 'required|decimal:0,2',
-               'image'=>'required|image|mimes:jpeg,jpg,png,gif|max:2000',
+               'image'=>'required|mimes:jpeg,jpg,png,gif|max:2000',
                'published'=>'boolean',
+               'category_id'=>'required',
              ]);
       //  dd($data);
         //$data['published']= isset($request-> published);
         $data['image']=$this->uploadFile($request->image, 'assets/images/cars');
+        
         car::create($data);
 
         return redirect()->route('cars.index');
@@ -59,23 +64,26 @@ class CarController extends Controller
      */
     public function show(string $id)
     {
+        $categories= Category::select('id','category_name')->get();
         $car= car::findOrFail($id);
-        return view ('car_details', compact('car'));
+        return view ('car_details', compact('car'), compact('categories'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
+    {   
+       //$categories= Category::findOrFail($id);
+        $categories= Category::select('id','category_name')->get();
         $car= car::findOrFail($id);
-        return view ('edit_car', compact('car'));
+        return view ('edit_car', compact('car'), compact('categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id) 
     {
        // dd($request , $id);
         /*$data= ['carTitle'=> $request-> carTitle,
@@ -89,14 +97,16 @@ class CarController extends Controller
                                              'price'=>'required|decimal:1',
                                               'image'=>'image|mimes:jpeg,jpg,png,gif|max:2000',
                                               'published'=>'boolean',
+                                              'category_id'=>'required',
                       ]);
               //  dd($data);
               // $data['published']= isset($request-> published);
                if ($request->hasFile('image')) {
                 $data['image'] = $this->uploadFile($request->image, 'assets/images/cars');
             }
-                    
+                  //  Category::where('id',$category_id)->update($data);
                car::where('id', $id)->update($data);
+
 
                return redirect()->route('cars.index');
     }

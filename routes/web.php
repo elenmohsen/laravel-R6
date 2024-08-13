@@ -8,6 +8,7 @@ use App\Http\Controllers\ClassController;
 use App\Http\Controllers\FashionController;
 
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -216,6 +217,8 @@ Route::group([
 Route::get('about', [ExampleController::class, 'about'])->name('about');
 
 Route::get('results', [ExampleController::class, 'studentresult']);
+
+Route::get('testOneToOne', [ExampleController::class, 'test']);
     
 //new project fashion
 

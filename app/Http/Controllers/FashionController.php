@@ -14,7 +14,7 @@ class FashionController extends Controller
      */
     public function index()
     {
-        $products=Fashionproduct::orderBy('id','desc')->where('published','=',1)->limit(3)->get();
+        $products=Fashionproduct::latest()->where('published','=',1)->limit(3)->get();
 
         return view('index',compact('products'));
     }
@@ -71,8 +71,8 @@ class FashionController extends Controller
     {
         $product = $request-> validate (['title'=>'required|string',
                                       'description'=> 'required|string|max:100',
-                                      'price'=> 'required|decimal:0,2',
-                                      'image'=>'image|mimes:jpeg,jpg,png,gif',
+                                      'price'=> 'required| new \App\Rules\GreaterThanTen',
+                                      'image'=>'mimes:jpeg,jpg,png,gif',
                                       'published'=>'boolean',
                                       'status'=>'string',
                ]);
