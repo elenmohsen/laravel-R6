@@ -46,7 +46,7 @@
               <td>{{ Str::limit($car['description'], 20, $end = '...') }}</td>
               <td>@if($car['published']==1) yes @else no @endif</td>
               <td>{{$car['image']}}</td>
-              <td>{{$car['category_id']}}</td>
+              <td> {{$car->category->category_name}}</td>
               <td><a href="{{route('cars.edit',$car['id'])}}">Edit</a></td>
               <td><a href="{{route('cars.show',$car['id'])}}">show</a></td>
               <td><a href="{{route('cars.destroy',$car['id'])}}" onclick=" return confirm('Are you sure you want to delete?')" >Delete</a></td>

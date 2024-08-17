@@ -169,7 +169,8 @@ Route::delete('/{id}/forcedelete','forcedelete')->name('forcedelete');
 Route::group([
     'prefix' => 'cars',
     'controller' => CarController::class,
-    'as' => 'cars.'
+    'as' => 'cars.',
+    'middleware' => 'verified'
 ], function() {
 
     Route::get('','index')->name('index');
@@ -219,6 +220,10 @@ Route::get('about', [ExampleController::class, 'about'])->name('about');
 Route::get('results', [ExampleController::class, 'studentresult']);
 
 Route::get('testOneToOne', [ExampleController::class, 'test']);
+
+Route::get('index', [ExampleController::class, 'contactusindex'])->name('contactus.index');
+Route::get('contactus', [ExampleController::class, 'contactuscreate'])->name('contactus');
+Route::post('contactus/store', [ExampleController::class, 'contactusstore'])->name('contactus.store');
     
 //new project fashion
 
@@ -238,3 +243,7 @@ Route::group([
     Route::get('/{id}/edit', 'edit')->name('edit');
     Route::put('/{id}', 'update')->name('update');
 });
+Auth::routes(['verify'=> true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('', [App\Http\Controllers\MailController::class, 'sendEmail']);
