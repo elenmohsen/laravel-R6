@@ -246,4 +246,6 @@ Route::group([
 Auth::routes(['verify'=> true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('', [App\Http\Controllers\MailController::class, 'sendEmail']);
+
+Route::get('contact-us', [App\Http\Controllers\MailController::class, 'viewForm']);
+Route::post('contact-us', [App\Http\Controllers\MailController::class, 'sendEmail'])->name('sendEmail');

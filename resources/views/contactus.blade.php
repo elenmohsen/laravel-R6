@@ -30,7 +30,7 @@
     <div class="container my-5">
         <div class="py-5 px-md-5 px-1  rounded-1 mx-md-5" style="background-color: #fffffff2;">
             <h2 class="fw-bold fs-1 mb-3 pb-2 text-center">Contact Us</h2>
-            <form action="{{route('contactus.store')}}" method="Post">
+            <form action="{{route('sendEmail')}}" method="Post">
                 @csrf
                 <div class="form-group mb-3 row">
                     <label for="" class="form-label col-md-2 fw-bold text-md-end">Name:</label>
@@ -45,10 +45,16 @@
                     </div>
                 </div>
                 <div class="form-group mb-3 row">
-                    <label for="" class="form-label col-md-2 fw-bold text-md-end">password:</label>
+                    <label for="" class="form-label col-md-2 fw-bold text-md-end">Subject:</label>
                     <div class="col-md-10">
-                        <input type="text" placeholder="Enter password" name="password" class="form-control py-2" />
+                        <input type="text" placeholder="Enter Subject" name="subject" class="form-control py-2" />
                     </div>
+                </div>
+                <div class="form-group mb-3 row">
+                    <label for="" class="form-label col-md-2 fw-bold text-md-end">Message:</label>
+                    <div class="col-md-10">
+                    <textarea name="message" id="" class="form-control"></textarea>
+                </div>
                 </div>
                 <hr>
                 <div class="mb-3">
