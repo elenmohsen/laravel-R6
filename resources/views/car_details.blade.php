@@ -52,8 +52,8 @@
               <div class="mb-4">
                 <p class="card-text">
                   <span class="fw-bold">
-                  Category_ID: 
-                 </span> {{$car->category_id}}
+                  Category_Name: 
+                 </span>  {{$car->category->category_name}}
                 </p>
               </div>
               

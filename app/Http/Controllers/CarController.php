@@ -18,6 +18,7 @@ class CarController extends Controller
     public function index()
     {
         $cars=car::get();
+        // dd($cars[0]->category->category_name);
 
         return view('cars',compact('cars'));
     }
@@ -64,9 +65,9 @@ class CarController extends Controller
      */
     public function show(string $id)
     {
-        $categories= Category::select('id','category_name')->get();
-        $car= car::findOrFail($id);
-        return view ('car_details', compact('car'), compact('categories'));
+       $car= car::with('category')->findOrFail($id);
+       //dd($car[0]->category->category_name);
+        return view ('car_details', compact('car'));
     }
 
     /**

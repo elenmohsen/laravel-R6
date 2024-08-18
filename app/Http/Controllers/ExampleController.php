@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class ExampleController extends Controller
 {
@@ -16,9 +17,29 @@ class ExampleController extends Controller
         return view('cv');
     }
 
-    function contactus(){
+   public function contactusindex()
+    {
+        $users=User::get();
+          
+        return view('users',compact('users'));
+    }
+
+    function contactuscreate(){
         return view('contactus');
     }
+  
+    function contactusstore(Request $request){
+
+    $data = $request-> validate (['name'=>'required|string',
+               'email'=> 'required|string|max:100',
+               'password'=> 'required|string',
+             ]);
+
+    User::create($data);
+
+    return redirect()->route('contactus');
+    }
+
 
     function personaldata(Request $request){
         $name= $request->name;
@@ -40,9 +61,9 @@ class ExampleController extends Controller
         return 'Uploaded';
     }
 //new project
-    public function index(){
+    /*public function index(){
         return view('index');
-    }
+    }*/
 
 
     public function about(){

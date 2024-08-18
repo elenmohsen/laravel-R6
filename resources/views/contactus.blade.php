@@ -30,7 +30,7 @@
     <div class="container my-5">
         <div class="py-5 px-md-5 px-1  rounded-1 mx-md-5" style="background-color: #fffffff2;">
             <h2 class="fw-bold fs-1 mb-3 pb-2 text-center">Contact Us</h2>
-            <form action="{{route('personaldata')}}" method="Post">
+            <form action="{{route('contactus.store')}}" method="Post">
                 @csrf
                 <div class="form-group mb-3 row">
                     <label for="" class="form-label col-md-2 fw-bold text-md-end">Name:</label>
@@ -45,18 +45,12 @@
                     </div>
                 </div>
                 <div class="form-group mb-3 row">
-                    <label for="" class="form-label col-md-2 fw-bold text-md-end">Subject:</label>
+                    <label for="" class="form-label col-md-2 fw-bold text-md-end">password:</label>
                     <div class="col-md-10">
-                        <input type="text" placeholder="Enter subject" name="subject" class="form-control py-2" />
+                        <input type="text" placeholder="Enter password" name="password" class="form-control py-2" />
                     </div>
                 </div>
                 <hr>
-                <div class="form-group mb-3 row">
-                    <label for="" class="form-label col-12 fw-bold">Message:</label>
-                    <div class="col-12">
-                        <textarea name="message" id="" class="form-control" rows="8" style="padding: 0.7rem;"></textarea>
-                    </div>
-                </div>
                 <div class="mb-3">
                     <button type="submit" class="btn mt-4 text-white fs-5 fw-bold border-0 py-2 px-md-5 w-100"
                         style="background-image: linear-gradient(90deg, #b743ae, #ed429e);">
