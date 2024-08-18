@@ -2,15 +2,13 @@
 
 namespace App\Mail;
 
-
-use Illuminate\Mail\Mailables\Address;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use App\Models\User;
 
 class OrderShipped extends Mailable 
 
@@ -20,10 +18,9 @@ class OrderShipped extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
-    {
-        protected User $user;
-    }
+    public function __construct(
+        public $data,
+    ) {}
 
     /**
      * Get the message envelope.
@@ -31,9 +28,8 @@ class OrderShipped extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope (
-           from: new Address('hello@example.com', '${APP_NAME}'),
-           
-            subject: 'send email in laravel 11'
+           from: new Address($this->data['email']),  
+            subject: $this->data['subject'],
             );
     }
 
