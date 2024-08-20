@@ -17,7 +17,7 @@ class ExampleController extends Controller
         return view('cv');
     }
 
-   public function contactusindex()
+   /*public function contactusindex()
     {
         $users=User::get();
           
@@ -38,7 +38,7 @@ class ExampleController extends Controller
     User::create($data);
 
     return redirect()->route('contactus');
-    }
+    }*/
 
 
     function personaldata(Request $request){
