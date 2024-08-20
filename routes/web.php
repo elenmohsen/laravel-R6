@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\CarController;
@@ -166,7 +167,7 @@ Route::delete('/{id}/forcedelete','forcedelete')->name('forcedelete');
 
  //cars project
 
-Route::group([
+/*Route::group([
     'prefix' => 'cars',
     'controller' => CarController::class,
     'as' => 'cars.',
@@ -183,7 +184,7 @@ Route::group([
     Route::get('/trashed','showDeleted')->name('showDeleted');
     Route::patch('/{id}','restore')->name('restore');
     Route::delete('/{id}/forcedelete','forcedelete')->name('forcedelete');
-});
+});*/
 
 
 
@@ -221,9 +222,9 @@ Route::get('results', [ExampleController::class, 'studentresult']);
 
 Route::get('testOneToOne', [ExampleController::class, 'test']);
 
-Route::get('index', [ExampleController::class, 'contactusindex'])->name('contactus.index');
+/*Route::get('index', [ExampleController::class, 'contactusindex'])->name('contactus.index');
 Route::get('contactus', [ExampleController::class, 'contactuscreate'])->name('contactus');
-Route::post('contactus/store', [ExampleController::class, 'contactusstore'])->name('contactus.store');
+Route::post('contactus/store', [ExampleController::class, 'contactusstore'])->name('contactus.store');*/
     
 //new project fashion
 

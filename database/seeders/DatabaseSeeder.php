@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use App\Models\car;
 use App\Models\Fashionproduct;
+use App\Models\Category;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,7 +16,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         //User::factory(10)->create();
+        User::factory(10)->create();
+        Category::factory(5)->create();
         car::factory(10)->create();
 
        /* User::factory()->create([
