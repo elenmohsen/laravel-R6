@@ -244,6 +244,8 @@ Route::group([
     Route::get('/{id}/edit', 'edit')->name('edit');
     Route::put('/{id}', 'update')->name('update');
 });
+
+
 Auth::routes(['verify'=> true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

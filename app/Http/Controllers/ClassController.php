@@ -15,6 +15,7 @@ class ClassController extends Controller
      */
     public function index()
     {
+      //dd(session('test'));
         $classes=Classdata::get();
           
         return view('classes',compact('classes'));
@@ -25,6 +26,8 @@ class ClassController extends Controller
      */
     public function create()
     {
+        session()->put('test', 'data entered succefully');
+       
         return view('class_data');
     }
 
