@@ -7,7 +7,9 @@ use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\FashionController;
-
+use App\Http\Controllers\SocialController;
+use App\Jobs\SendmailJob;
+   
 
 
 Route::get('/', function () {
@@ -252,3 +254,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('contact-us', [App\Http\Controllers\MailController::class, 'viewForm']);
 Route::post('contact-us', [App\Http\Controllers\MailController::class, 'sendEmail'])->name('sendEmail');
+
+Route::get('auth/github/redirect', [SocialController::class, 'redirect'])->name('socialLogin');
+Route::get('auth/github/callback', [SocialController::class, 'callback']);
+
+
+Route::get('send/message', function(){
+   $job = (new SendmailJob())->delay(\Carbon\carbon::now()->addSeconds(5));
+   dispatch($job);
+   return "test send message";
+
+});
